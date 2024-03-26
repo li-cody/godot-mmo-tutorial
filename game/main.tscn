@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjvvw8v1flave"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_me4m4"]
+[ext_resource type="PackedScene" uid="uid://lvbf3kcd0pyf" path="res://Chatbox.tscn" id="2_il81h"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_me4m4")
+
+[node name="Chatbox" parent="." instance=ExtResource("2_il81h")]
+offset_top = 3.0
+offset_bottom = 3.0
