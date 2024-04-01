@@ -4,6 +4,7 @@ from twisted.python import log
 from twisted.internet import reactor, task
 from autobahn.twisted.websocket import WebSocketServerFactory
 
+import django_app.manage
 import protocol
 
 
@@ -15,6 +16,8 @@ class GameFactory(WebSocketServerFactory):
         self.players: set[protocol.GameServerProtocol] = set()
 
         tickloop = task.LoopingCall(self.tick)
+
+        # Run server at 20 Hz
         tickloop.start(1/20)
     
     def tick(self):

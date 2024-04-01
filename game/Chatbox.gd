@@ -18,9 +18,9 @@ func _input(event: InputEvent):
 			KEY_ESCAPE:
 				input_field.release_focus()
 
-func add_message(text: String):
+func add_message(username: String, text: String):
 	print("add_message")
-	chat_log.append_text(text + "\n")
+	chat_log.append_text(username + " says: " + text + "\n")
 
 func text_entered(text: String):
 	if len(text) > 0:

@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 autobahn = {extras = ["twisted"], version = "*"}
 twisted = "*"
+django = "*"
 
 [dev-packages]
 

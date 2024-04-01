@@ -1,8 +1,15 @@
 import json
 import enum
 
+
 class Action(enum.Enum):
+    # Different kinds of packets that our protocols can support
     Chat = enum.auto()
+    Ok = enum.auto()
+    Deny = enum.auto()
+    Login = enum.auto()
+    Register = enum.auto()
+
 
 class Packet:
     def __init__(self, action: Action, *payloads):
@@ -18,6 +25,7 @@ class Packet:
 
     def __bytes__(self) -> bytes:
         return str(self).encode('utf-8')   
+
 
 def from_json(json_str: str) -> Packet:
     obj_dict = json.loads(json_str)
@@ -43,5 +51,25 @@ def from_json(json_str: str) -> Packet:
 
 
 class ChatPacket(Packet):
-    def __init__(self, message: str):
-        super().__init__(Action.Chat, message)
+    def __init__(self, sender: str, message: str):
+        super().__init__(Action.Chat, sender, message)
+
+
+class OkPacket(Packet):
+    def __init__(self):
+        super().__init__(Action.Ok)
+
+
+class DenyPacket(Packet):
+    def __init__(self, reason: str):
+        super().__init__(Action.Deny, reason)
+
+
+class LoginPacket(Packet):
+    def __init__(self, username: str, password: str):
+        super().__init__(Action.Login, username, password)
+
+
+class RegisterPacket(Packet):
+    def __init__(self, username: str, password: str):
+        super().__init__(Action.Register, username, password)
